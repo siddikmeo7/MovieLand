@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Main Page {% endblock title %}</title>
+      
+  
+</head>
+<body>
+    <header>
+        <button>Button1</button>
+        <button>Button2</button>
+    </header>
+<div class="con">
+    {% for movie in object_list  %}
+    <div class="card">
+        <h1>Name:{{movie.name}}</h1>
+        <h2>Description:{{movie.description}}</h2>
+        <h3>Janre{{movie.janre}}</h3>
+        <h4>Trailer:{{movie.trailer}}</h4>
+        <h5>Bio:{{movie.bio}}</h5>
+    </div>
+    {% endfor %}
+</div>
+    <footer>
+        <a href="#">About Us</a>
+    </footer>
+</body>
+</html>
