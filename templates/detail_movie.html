@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}{{ movie.name }}{% endblock title %}
+
+<head>
+    <style>
+        .movie-detail {
+            border: 5px solid black;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #fff;
+            max-width: 800px; 
+            margin: 20px auto; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-detail img {
+            width: 100%;
+            height: auto; 
+            border-radius: 8px; 
+            margin-bottom: 20px; 
+        }
+
+        .movie-detail h1 {
+            text-align: center; 
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .movie-detail p {
+            margin: 10px 0; 
+            font-size: 1.1em; 
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center; 
+            gap: 15px; 
+            margin-top: 20px; 
+        }
+
+        .button-container button {
+            background-color: #007bff;
+            color: white; 
+            padding: 10px 15px; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+            transition: background-color 0.3s ease; 
+        }
+
+        .button-container button:hover {
+            background-color: #0056b3; 
+        }
+    </style>
+</head>
+
+{% block content %}
+<div class="movie-detail">
+    {% if movie.photo %}
+        <img src="{{ movie.photo.url }}" alt="{{ movie.name }}">
+    {% endif %}
+    
+    <h1>{{ movie.name }}</h1>
+    <p><strong>Description:</strong> {{ movie.description }}</p>
+    <p><strong>Genre:</strong> {{ movie.janre }}</p>
+    
+    {% if movie.trailer %}
+    <p>
+        <strong>Trailer:</strong>
+        <a href="{% url 'Watch-Movie-Trailer' movie.trailer.id %}">Watch Trailer</a>
+    </p>  
+    {% endif %}
+
+    <p><strong>Bio:</strong> {{ movie.bio }}</p>
+    <p><strong>Theater:</strong> <a href="">{{ movie.theater }}</a></p>
+    
+    <div class="button-container">
+        <a href="{% url 'Edit-Movie' movie.id %}"><button>Edit Movie</button></a>
+        <a href="{% url 'Delete-Movie' movie.id %}"><button>Delete Movie</button></a>
+        <a href="{% url 'Order-Movie-Ticket' %}"><button>Order Ticket</button></a>
+        <a href="{% url 'Base-Page' %}"><button type="button">Back to Main Page</button></a>
+    </div>
+</div>
+{% endblock content %}

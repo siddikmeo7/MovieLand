@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}
+Confirmation Deletion Answer
+{% endblock title %}
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .confirmation-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    h1 {
+        color: #d9534f; 
+        margin-bottom: 20px;
+    }
+
+    h2, h3 {
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    img {
+        max-width: 300px; 
+        height: auto; 
+        border-radius: 4px;
+        margin: 10px 0;
+    }
+
+    .delation {
+        background-color: #d9534f;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .delation:hover {
+        background-color: #3cc92c; 
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        text-decoration: none;
+        color: #007bff;
+        font-size: 1em;
+        transition: color 0.3s;
+    }
+
+    .back-link:hover {
+        color: #0056b3; 
+    }
+</style>
+
+<div class="confirmation-container">
+    <h1>Are you sure you want to delete the answer with ID: {{ movie.id }}?</h1>
+    <h2>Name: {{ movie.name }}</h2>
+    <h3>Description: {{ movie.description }}</h3>
+    <div>
+        <strong>Photo:</strong>
+        <img src="{{ movie.photo.url }}" alt="{{ movie.name }}">
+    </div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <button class="delation" type="submit">Yes</button>
+    </form>
+    <a class="back-link" href="{% url 'Base-Page' %}">Back to the Main Page</a>
+</div>
+{% endblock content %}

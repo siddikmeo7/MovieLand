@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}
+
+{% endblock title %}
+
+{% if object_list %}
+    {% for movie in object_list %}
+        <div class="con">
+            <h1>{{ movie.id }}</h1>
+            <h2>{{ movie.name }}</h2>
+            <h3>{{ movie.janre }}</h3>
+            <h4>{{ movie.description }}</h4>
+            <h5>{{ movie.salary }}</h5>
+            <h6>{{ movie.date_posted }}</h6>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No movies available.</p>
+{% endif %}

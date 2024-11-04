@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Movie Trailer{% endblock title %}
+
+{% block content %}
+<head>
+    <style>
+        .trailercon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        video {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .trailercon button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .trailercon button:hover {
+            background-color: #00b300;
+        }
+    </style>
+</head>
+
+<div class="trailercon">
+    <h1>Name: {{ trailer.name }}</h1>
+    <video controls>
+        <source src="{{ trailer.trailer_video.url }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <p>Posted At: {{ trailer.created_at }}</p>
+    <a href="{% url 'Order-Movie-Ticket' %}"><button>Order Ticket</button></a>
+</div>
+{% endblock content %}

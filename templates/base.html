@@ -5,25 +5,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} Main Page {% endblock title %}</title>
-      
-  
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            background-color: #343a40;
+            padding: 15px;
+            border-radius: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .zag{
+            text-align: center;
+            color: #007bff;
+        }
+
+        header a button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        header a button:hover {
+            background-color: #0056b3;
+        }
+
+        .con {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .large-card {
+            display: flex;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 800px; 
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .large-card img {
+            width: 300px;
+            height: auto; 
+            object-fit: cover;
+        }
+
+        .card-details {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        .card-details h1 {
+            font-size: 1.5em;
+            color: #007bff; 
+            margin-bottom: 10px;
+        }
+
+        .card-details h2, .card-details h3, .card-details h4, .card-details h5 {
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .detail-button {
+            margin-top: auto; 
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        .detail-button:hover {
+            background-color: #218838; 
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <button>Button1</button>
-        <button>Button2</button>
+        <a href="{% url 'Base-Page' %}"><button>Home Page</button></a>
+        <a href="{% url 'Create-Movie' %}"><button>Post New Movie</button></a>
+        <a href="{% url 'Add-Trailer' %}"><button>Create Trailer</button></a>
+        <a href="{% url 'See-Registered-Users' %}"><button>See Registered Users</button></a>
+        <a href="{% url 'Add-Bio' %}"><button>Add Bio</button></a>
     </header>
-<div class="con">
-    {% for movie in object_list  %}
-    <div class="card">
-        <h1>Name:{{movie.name}}</h1>
-        <h2>Description:{{movie.description}}</h2>
-        <h3>Janre{{movie.janre}}</h3>
-        <h4>Trailer:{{movie.trailer}}</h4>
-        <h5>Bio:{{movie.bio}}</h5>
+    {% block content %}
+    <h1 class="zag">Movie</h1>
+    <div class="con">
+        {% for movie in object_list %}
+        <a href="{% url 'Detail-Movie' movie.id %}"><div class="large-card">
+            {% if movie.photo %}
+            <img src="{{ movie.photo.url }}" alt="{{ movie.name }}">
+            {% endif %}
+            <div class="card-details">
+                <a href="{% url 'Detail-Movie' movie.id %}"><h1>{{ movie.name }}</h1></a>
+                <h2>Description: {{ movie.description }}</h2>
+                <h3>Genre: {{ movie.janre }}</h3>
+                <h4>Trailer: {{ movie.trailer }}</h4>
+                <h5>Bio: {{ movie.bio }}</h5>
+            </div></a>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
+    {% endblock content %}
     <footer>
         <a href="#">About Us</a>
     </footer>

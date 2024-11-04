@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Orders{% endblock title %}
+{% block content %}
+    <div class="con">
+        <h1>Type:{{order.payment_type}}</h1>
+        <h2>User:{{order.user}}</h2>
+        <h3>Movie:{{order.movie}}</h3>
+        <h4>Ticket Price{{order.ticket_price}}</h4>
+        <h5>Amount Ticket:{{order.amount_ticket}}</h5>
+        <h6>Ordered At:{{order.order_date}}</h6>
+    </div>
+{% endblock content %}
+
